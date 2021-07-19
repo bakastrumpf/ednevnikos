@@ -13,7 +13,7 @@ import com.iktpreobuka.ednevnikos2.repositories.UserRepository;
 
 @RestController
 @RequestMapping("/users")
-public class UserContoller {
+public class UserController {
 	
 	@Autowired
 	private UserRepository userRepository; 
