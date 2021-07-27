@@ -1,46 +1,71 @@
 package com.iktpreobuka.ednevnikos2.entities;
 
-import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.iktpreobuka.ednevnikos2.security.Pogledi;
 
 @Entity
+@Table(name = "korisnici")
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+@Inheritance(strategy = InheritanceType.JOINED)
 public class UserEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "user_id")
 	private Integer id;
-	private String ime;
+	
+	@Column
+	@NotNull(message = "Prezime must not be empty")
+	@Size(min = 2, max = 15, message = "Prezime mora imati između {min} i {max} znakova")
+	@JsonView(Pogledi.Public.class)
+	@JsonProperty("PREZIME")
 	private String prezime;
-	private String korisnickoIme;
+	
+	@Column
+	@NotNull(message = "Ime must not be empty")
+	@Size(min = 2, max = 15, message = "Ime mora imati između {min} i {max} znakova")
+	@JsonView(Pogledi.Public.class)
+	@JsonProperty("IME")
+	private String ime;
+	
+	@Column
+	//@Column(nullable = false)
+	@JsonView(Pogledi.Admin.class)
+	protected UserRole uloga;
+	
+	@JsonView(Pogledi.Admin.class)
+	@JsonProperty("IMEJL ADRESA")
+	@Column
+	@NotNull(message = "Email must not be empty")
 	private String mejl;
-	@JsonIgnore
-	private String lozinka;
-	
-	
-	//@ManyToOne (cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
-	//@JoinColumn(name = "address")
-	//private AddressEntity address;
 	
 	public UserEntity() {
 		super();
 	}
 
-	public UserEntity(Integer id, String ime, String prezime, String korisnickoIme, String mejl, String lozinka) {
+	public UserEntity(Integer id,
+			@NotNull(message = "Prezime must not be empty") @Size(min = 2, max = 15, message = "Prezime mora imati između {min} i {max} znakova") String prezime,
+			@NotNull(message = "Ime must not be empty") @Size(min = 2, max = 15, message = "Ime mora imati između {min} i {max} znakova") String ime,
+			UserRole uloga, @NotNull(message = "Email must not be empty") String mejl) {
 		super();
 		this.id = id;
-		this.ime = ime;
 		this.prezime = prezime;
-		this.korisnickoIme = korisnickoIme;
+		this.ime = ime;
+		this.uloga = uloga;
 		this.mejl = mejl;
-		this.lozinka = lozinka;
 	}
 
 	public Integer getId() {
@@ -51,14 +76,6 @@ public class UserEntity {
 		this.id = id;
 	}
 
-	public String getIme() {
-		return ime;
-	}
-
-	public void setIme(String ime) {
-		this.ime = ime;
-	}
-
 	public String getPrezime() {
 		return prezime;
 	}
@@ -67,12 +84,20 @@ public class UserEntity {
 		this.prezime = prezime;
 	}
 
-	public String getKorisnickoIme() {
-		return korisnickoIme;
+	public String getIme() {
+		return ime;
 	}
 
-	public void setKorisnickoIme(String korisnickoIme) {
-		this.korisnickoIme = korisnickoIme;
+	public void setIme(String ime) {
+		this.ime = ime;
+	}
+
+	public UserRole getUloga() {
+		return uloga;
+	}
+
+	public void setUloga(UserRole uloga) {
+		this.uloga = uloga;
 	}
 
 	public String getMejl() {
@@ -83,11 +108,6 @@ public class UserEntity {
 		this.mejl = mejl;
 	}
 
-	public String getLozinka() {
-		return lozinka;
-	}
+	
 
-	public void setLozinka(String lozinka) {
-		this.lozinka = lozinka;
-	}
 }
