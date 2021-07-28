@@ -1,16 +1,16 @@
 package com.iktpreobuka.ednevnikos2.models;
 
-public class MejlObject {
+public class MejlModel {
 	
 	private String to;
 	private String subject;
 	private String textBody;
 	
-	public MejlObject() {
+	public MejlModel() {
 		super();
 	}
 
-	public MejlObject(String to, String subject, String textBody) {
+	public MejlModel(String to, String subject, String textBody) {
 		super();
 		this.to = to;
 		this.subject = subject;
