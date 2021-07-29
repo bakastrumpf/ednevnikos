@@ -9,6 +9,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -37,6 +40,24 @@ public class UcenikEntity extends UserEntity {
 
 	public UcenikEntity() {
 		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public UcenikEntity(Integer id,
+			@NotNull(message = "Prezime must not be empty") 
+			@Size(min = 2, max = 15, message = "Prezime mora imati između {min} i {max} znakova") 
+				String prezime,
+			@NotNull(message = "Ime must not be empty") 
+			@Size(min = 2, max = 15, message = "Ime mora imati između {min} i {max} znakova") 
+				String ime,
+			@NotNull(message = "Email must not be empty") 
+				String mejl,
+			@NotNull(message = "Lozinka must not be empty") 
+			@Size(min = 3, max = 50, message = "Lozinka mora imati između {min} i {max} znakova") 
+				String lozinka,
+			UserRole uloga) {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	public UcenikEntity(OdeljenjeEntity odeljenje, RoditeljEntity roditelj, List<OcenaEntity> ocene,
@@ -79,7 +100,5 @@ public class UcenikEntity extends UserEntity {
 	public void setProfesori(List<PredajeUceniku> profesori) {
 		this.profesori = profesori;
 	}
-
-	
 
 }

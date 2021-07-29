@@ -5,15 +5,15 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.iktpreobuka.ednevnikos2.entities.NastavnikEntity;
 import com.iktpreobuka.ednevnikos2.entities.PredmetEntity;
+import com.iktpreobuka.ednevnikos2.entities.UserEntity;
 import com.iktpreobuka.ednevnikos2.repositories.NastavnikRepository;
 import com.iktpreobuka.ednevnikos2.repositories.OcenaRepository;
 import com.iktpreobuka.ednevnikos2.repositories.PredmetRepository;
 import com.iktpreobuka.ednevnikos2.repositories.UcenikRepository;
-import com.iktpreobuka.ednevnikos2.services.UserServiceImpl;
 import com.iktpreobuka.ednevnikos2.utils.KorisnikCustomValidator;
 
 @RestController
@@ -37,6 +37,15 @@ public class PredmetController {
 
 	@Autowired
 	KorisnikCustomValidator korisnikCustomValidator;
+	
+	@RequestMapping(method = RequestMethod.POST)
+	public PredmetEntity dodajPredmet(@RequestParam String nazivPredmeta, @RequestParam Integer nedFondCasova) {
+		PredmetEntity predmet = new PredmetEntity();
+		predmet.setNazivPredmeta(nazivPredmeta);
+		predmet.setNedFondCasova(nedFondCasova);
+		predmetRepository.save(predmet);
+		return predmet;
+	}
 
 	// TODO GET - izlistaj sve predmete
 	@RequestMapping(method = RequestMethod.GET)

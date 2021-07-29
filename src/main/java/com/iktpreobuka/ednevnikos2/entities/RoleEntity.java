@@ -27,20 +27,21 @@ public class RoleEntity {
 	private Integer id;
 	
 	@Column(name = "uloga_ime")
-	private String ime;
+	private String imeUloge;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "uloga", fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH})
 	private List<UserEntity> users = new ArrayList<>();
 
 	public RoleEntity() {
-	//	super();
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
-	public RoleEntity(Integer id, String ime, List<UserEntity> users) {
+	public RoleEntity(Integer id, String imeUloge, List<UserEntity> users) {
 		super();
 		this.id = id;
-		this.ime = ime;
+		this.imeUloge = imeUloge;
 		this.users = users;
 	}
 
@@ -52,12 +53,12 @@ public class RoleEntity {
 		this.id = id;
 	}
 
-	public String getIme() {
-		return ime;
+	public String getImeUloge() {
+		return imeUloge;
 	}
 
-	public void setIme(String ime) {
-		this.ime = ime;
+	public void setImeUloge(String imeUloge) {
+		this.imeUloge = imeUloge;
 	}
 
 	public List<UserEntity> getUsers() {

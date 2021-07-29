@@ -1,13 +1,12 @@
 package com.iktpreobuka.ednevnikos2.controllers.util;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.iktpreobuka.ednevnikos2.security.Pogledi;
 
 public class RestErrorEdnevnikOS {
 	
-	@JsonView(Pogledi.Public.class)
+
 	public Integer code;
-	@JsonView(Pogledi.Public.class)
+
 	public String message;
 	
 	public RestErrorEdnevnikOS() {

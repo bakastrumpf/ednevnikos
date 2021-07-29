@@ -8,7 +8,6 @@ import com.iktpreobuka.ednevnikos2.repositories.NastavnikRepository;
 import com.iktpreobuka.ednevnikos2.repositories.OcenaRepository;
 import com.iktpreobuka.ednevnikos2.repositories.PredmetRepository;
 import com.iktpreobuka.ednevnikos2.repositories.UcenikRepository;
-import com.iktpreobuka.ednevnikos2.services.UserServiceImpl;
 import com.iktpreobuka.ednevnikos2.utils.KorisnikCustomValidator;
 
 @RestController

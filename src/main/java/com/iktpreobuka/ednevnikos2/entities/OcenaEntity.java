@@ -65,10 +65,15 @@ public class OcenaEntity {
 	}
 
 	public OcenaEntity(Integer id,
-			@NotNull(message = "Morate uneti ocenu") @Min(value = 1, message = "Najmanja ocena je 1") @Max(value = 5, message = "Najveća ocena je 5") Integer ocena,
-			@NotNull(message = "Učenik može dobiti ocenu samo iz određenog predmeta") PredmetEntity kurs,
+			@NotNull(message = "Morate uneti ocenu") 
+			@Min(value = 1, message = "Najmanja ocena je 1") 
+			@Max(value = 5, message = "Najveća ocena je 5") 
+				Integer ocena,
+			@NotNull(message = "Učenik može dobiti ocenu samo iz određenog predmeta") 
+				PredmetEntity kurs,
 			Date datumOcene,
-			@NotNull(message = "Ocenu može uneti samo odgovarajući nastavnik.") NastavnikEntity ocenjivac,
+			@NotNull(message = "Ocenu može uneti samo odgovarajući nastavnik.") 
+				NastavnikEntity ocenjivac,
 			UcenikEntity ucenik) {
 		super();
 		this.id = id;
@@ -127,5 +132,4 @@ public class OcenaEntity {
 		this.ucenik = ucenik;
 	}
 
-	
 }
